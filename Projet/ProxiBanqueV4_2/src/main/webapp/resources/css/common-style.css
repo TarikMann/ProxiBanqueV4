@@ -1,0 +1,93 @@
+@charset "UTF-8";
+
+#page {
+	margin-top: 20px;
+	margin-left: 20px;
+	margin-right: 20px;
+}
+
+#footer {
+	background: #f8f9fa;
+	color: grey;
+	height: 100px;
+	text-align: center;
+	padding: 20px;
+}
+
+#section {
+	padding: auto;
+	height: 600px;
+	padding: auto;
+}
+
+.navbar-light .navbar-nav .nav-link {
+	color: black;
+}
+
+.col-sm {
+	height: 500px;
+	margin-top: 100px;
+}
+
+.login-form {
+	padding: auto;
+	width: 50px;
+}
+
+btn btn-primary {
+	text-align: center;
+	font-size:10px;
+}
+
+.bg-light {
+	background-color: #f8f9fa;
+	margin-bottom: 20px;
+	border: black 1px solid;
+}
+
+#affichageclient-button-creer {
+	padding: 10px;
+	width: 50%;
+	position: relative;
+	left: 25%;
+	top: 15%;
+}
+
+#affichageclient-button-rapport {
+	padding: 10px;
+	width: 50%;
+	margin-top:100px;
+}
+
+#affichageclient-table {
+	margin-top: 50px;
+}
+
+#affichage-comptes-client-entete {
+	text-align: center;
+}
+
+#reporting-gerant-entete {
+	text-align: center;
+}
+
+#affichage-comptes-client-table {
+	margin-top: 50px;
+}
+
+#reporting-gerant-table {
+	margin-top: 50px;
+}
+
+#reporting-gerant-titre-colonnes {
+	text-align: center;
+}
+
+#liste-conseillers-titre-colonnes {
+	text-align: center;
+}
+
+#erreur-message {
+	text-align: center;
+}
+

@@ -1,0 +1,16 @@
+fr\gtm\proxibanque\beans\ClientProxiBean.class
+fr\gtm\proxibanque\domaine\Conseiller.class
+fr\gtm\proxibanque\service\CompteService$3.class
+fr\gtm\proxibanque\domaine\ClientProxi.class
+fr\gtm\proxibanque\service\CompteService.class
+fr\gtm\proxibanque\interfaces\IClientService.class
+fr\gtm\proxibanque\service\CompteService$2.class
+fr\gtm\proxibanque\service\ConseillerService$1.class
+fr\gtm\proxibanque\beans\CompteBean.class
+fr\gtm\proxibanque\service\CompteService$1.class
+fr\gtm\proxibanque\service\ClientService.class
+fr\gtm\proxibanque\service\ConseillerService.class
+fr\gtm\proxibanque\domaine\Transaction.class
+fr\gtm\proxibanque\service\ClientService$1.class
+fr\gtm\proxibanque\beans\ConseillerBean.class
+fr\gtm\proxibanque\domaine\Compte.class

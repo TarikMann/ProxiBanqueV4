@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+</h:head>
+
+<h:body>
+
+	<ui:composition template="template/common-layout.xhtml">
+
+		<ui:define name="section">
+
+			<div class="container-fluid">
+				<div class="row">
+
+					<div class="col-sm-3">
+
+						<!--  navigation prévue dans les cas de navigation faces-config.xml -->
+						<h:button class="btn btn-secondary btn-sm"
+							id="affichageclient-button-creer" value="créer un client"
+							onclick="window.location.href='/ProxiBanqueV4_2/faces/creation-client.xhtml'; return false;"
+							action="/creation-client.xhtml" />
+
+					</div>
+					<div class="col-sm-9">
+						<h2>Bonjour, votre compte utilisateur :
+							#{clientProxiBean.conseiller.prenomConseiller}</h2>
+					</div>
+				</div>
+
+
+
+				<div class="row">
+
+					<h:form id="formDataTable">
+						<p:dataTable id="affichageclient-table" var="client"
+							value="#{clientProxiBean.listClient}">
+							<p:column headerText="nom">
+								<h:outputText value="#{client.nomClient} " />
+							</p:column>
+
+							<p:column headerText="prenom">
+								<h:outputText value="#{client.prenomClient}" />
+							</p:column>
+
+							<p:column headerText="email">
+								<h:outputText value="#{client.emailClient}" />
+							</p:column>
+
+							<p:column headerText="adresse">
+								<h:outputText value="#{client.adresseClient}" />
+							</p:column>
+
+							<p:column headerText="gestion">
+
+								<f:facet name="header">gestion</f:facet>
+
+								<!-- 							<h:commandButton class="btn btn-secondary btn-sm" -->
+								<!-- 								id="affichageclient-button-gestion" value="liste des comptes" -->
+								<!-- 								onclick="window.location.href='/ProxiBanqueV4_2/faces/liste-comptes-client.xhtml'; return false;" -->
+								<!-- 								action="/liste-comptes-client.xhtml" /> -->
+
+								<p:commandButton id="affichageclient-button-gestion-compte"
+									value="  liste des comptes"
+									action="#{compteBean.obtenirlisteDesCompte(client)}" />
+
+
+
+
+
+
+								<h:commandButton class="btn btn-secondary btn-sm"
+									id="affichageclient-button-gestion" value="virement"
+									action="#{compteBean.affichagevirement(client)}" />
+
+								<h:commandButton class="btn btn-secondary btn-sm"
+									id="affichageclient-button-gestion-mod" value="modifier"
+									action="modification_client" />
+
+								<h:commandButton
+									class=" btn 
+								btn-secondary 
+								btn-sm"
+									id="affichageclient-button-gestion-sup" value="supprimer"
+									action="#{clientProxiBean.supprimerClient}" />
+
+							</p:column>
+
+						</p:dataTable>
+					</h:form>
+				</div>
+
+
+			</div>
+		</ui:define>
+
+	</ui:composition>
+
+</h:body>
+
+</html>

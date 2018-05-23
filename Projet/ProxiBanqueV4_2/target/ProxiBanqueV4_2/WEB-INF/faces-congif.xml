@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<faces-config xmlns="http://java.sun.com/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
+	http://java.sun.com/xml/ns/javaee/web-facesconfig_2_1.xsd"
+	version="2.1">
+
+	<application>
+		<el-resolver>
+			org.springframework.web.jsf.el.SpringBeanFacesELResolver
+		</el-resolver>
+	</application>
+
+
+	<!-- navigation suite à la soumission du formaulaire d'authentification -->
+	<!-- authentification.xhtml VERS (liste-conseillers.xhtml OU erreur.xhtml) -->
+
+	<navigation-rule>
+		<from-view-id>/authentification.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>succes_conseiller</from-outcome>
+			<to-view-id>/WEB-INF/views/liste-clients.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>succes_gerant</from-outcome>
+			<to-view-id>/WEB-INF/views/liste-conseillers.xhtml</to-view-id> <!-- fichier source : WEB-INF -->
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>echec_authentification</from-outcome>
+			<!-- ajouter un message d'erreur sur la page -->
+			<to-view-id>/WEB-INF/views/erreur.xhtml</to-view-id> <!-- fichier source : WEB-INF -->
+		</navigation-case>
+	</navigation-rule>
+
+
+	<!-- navigation suite à la soumission du formulaire de création d'un client -->
+	<!-- creation-client.xhtml VERS (liste-clients.xhtml OU erreur.xhtml) -->
+	<navigation-rule>
+		<from-view-id>/creation-client.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>succes_creation</from-outcome>
+			<to-view-id>/WEB-INF/views/liste-clients.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>echec_creation</from-outcome>
+			<!-- ajouter un message d'erreur sur la page -->
+			<to-view-id>/WEB-INF/views/erreur.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+
+
+	<!-- navigation suite à la soumission du formulaire de modification d'un 
+		client -->
+	<!-- modification-client.xhtml VERS (liste-clients.xhtml OU erreur.xhtml) -->
+	<navigation-rule>
+		<from-view-id>/modification-client.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>succes_modification</from-outcome>
+			<to-view-id>/WEB-INF/views/liste-clients.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>echec_modification</from-outcome>
+			<!-- ajouter un message d'erreur sur la page -->
+			<to-view-id>/WEB-INF/views/erreur.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+
+
+	<!-- navigation suite à la soumission du formulaire de virement -->
+	<!-- virement.xhtml VERS (liste-clients.xhtml OU erreur.xhtml) -->
+	<navigation-rule>
+		<from-view-id>/modification-client.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>succes_modification</from-outcome>
+			<to-view-id>/WEB-INF/views/liste-clients.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>echec_modification</from-outcome>
+			<!-- ajouter un message d'erreur sur la page -->
+			<to-view-id>/WEB-INF/views/erreur.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+
+
+	<!-- navigation suite au clic sur le bouton virement de la page 
+		liste-clients.xhtml -->
+	<!-- liste-clients.xhtml VERS modification-client.xhtml -->
+	<navigation-rule>
+		<from-view-id>/virement.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>succes_virement</from-outcome>
+			<to-view-id>/WEB-INF/views/liste-clients.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>echec_virement</from-outcome>
+			<to-view-id>/WEB-INF/views/erreur.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+
+	<!-- navigation suite au clic sur le bouton créer client de la page liste-clients.xhtml -->
+	<!-- liste-clients.xhtml VERS creation-client.xhtml -->
+	<navigation-rule>
+		<from-view-id>/liste-clients.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>creation_client</from-outcome>
+			<to-view-id>/WEB-INF/views/creation-client.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+
+
+	<!-- navigation suite au clic sur le bouton virement de la page liste-clients.xhtml -->
+	<!-- liste-clients.xhtml VERS virement.xhtml -->
+	<navigation-rule>
+		<from-view-id>/liste-clients.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>virement</from-outcome>
+			<to-view-id>/WEB-INF/views/virement.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+
+
+	<!-- navigation suite au clic sur le bouton modifier un client de la page 
+		liste-clients.xhtml -->
+	<!-- liste-clients.xhtml VERS modification-client.xhtml -->
+	<navigation-rule>
+		<from-view-id>/liste-clients.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>modification_client</from-outcome>
+			<to-view-id>/WEB-INF/views/modification-client.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+
+
+</faces-config>
