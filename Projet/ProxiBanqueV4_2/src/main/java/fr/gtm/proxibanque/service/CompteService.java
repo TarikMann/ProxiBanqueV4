@@ -16,17 +16,27 @@ import fr.gtm.proxibanque.domaine.ClientProxi;
 import fr.gtm.proxibanque.domaine.Compte;
 import fr.gtm.proxibanque.domaine.Transaction;
 
+/**
+ * Classe de service utilisee par la couche de presentation, en ce qui concerne
+ * les operations liees a la gestion des comptes. Pour effectuer les traitements
+ * correspondant, elle consomme le WebService.
+ * 
+ * @author groupe 1
+ *
+ */
 public class CompteService {
 	/**
 	 * Propriete permettant aux methodes de cette classe de convertir des fichiers
 	 * JSON en objets java et vis-versa grace au framework Jackson
 	 */
+
 	private ObjectMapper mapper = new ObjectMapper();
 	/**
 	 * Propriete permettant que ce programme soit un client HTTP pour envoyer des
 	 * requetes vers le web service consomme et de recevoir les reponses
 	 * correspondantes
 	 */
+
 	Client client = Client.create();
 	/**
 	 * propriete correspondant aux chaines de caracteres en format JSON extraites
@@ -47,26 +57,33 @@ public class CompteService {
 	 */
 	private String debutUrl = "http://192.168.1.70:8080/webservice_1.0/api/compteWS";
 
+	/**
+	 * methode qui s'adresse au WebService pour recuperer une liste de tous les
+	 * comptes de la banque
+	 * 
+	 * @return liste d'objets de type Compte (tous compte quelque soit le client ou
+	 *         le conseiller associé)
+	 */
 	public List<Compte> obtenirComptesBanque() {
 		// log pour le debut de la methode
 		CompteService.LOGGER.info("gerant Entree dans la methode obtenirComptesBanque");
-		// declaration de la liste d'objets ClientProxi obtenue au cours de la methode
+		// declaration de la liste d'objets Compte obtenue au cours de la methode
 		// et retournee en fin de methode
 		List<Compte> listeComptes = null;
 		// construction d'une requete HTTP
 		// (notamment l'URL qui ne contient pas de
 		// parametre ici car le traitement demande n'est pas associe a un client
 		// particulier)
-		WebResource webResource = this.client.resource(this.debutUrl + "/obtenirComptesBanque");
+		WebResource webResource = client.resource(this.debutUrl + "/obtenirComptesBanque");
 		// pas d'ajout de JSON a la requete ici car on n'envoit pas d'objet au WS
 		// envoi de la requete au webservice
 		// recuperation de la reponse
 		ClientResponse response = webResource.accept("application/json").get(ClientResponse.class);
 		// extraction du JSON de la reponse HTTP
-		this.retour = response.getEntity(String.class);
+		retour = response.getEntity(String.class);
 		try {
 			// conversion du JSON recupere en objet de type liste de Compte
-			listeComptes = this.mapper.readValue(this.retour, new TypeReference<List<Compte>>() {
+			listeComptes = mapper.readValue(retour, new TypeReference<List<Compte>>() {
 			});
 		} catch (IOException e) {
 			// creation d'un log d'erreur en cas de catch
@@ -92,7 +109,7 @@ public class CompteService {
 	/**
 	 * methode qui s'adresse au WebService pour recuperer une liste des comptes
 	 * possedes par un client donne
-	 *
+	 * 
 	 * @return liste d'objets Compte contenant chacun les informations sur un compte
 	 *         du client
 	 * @param objet
@@ -100,63 +117,107 @@ public class CompteService {
 	 *            filtrer les comptes de la liste retournee
 	 */
 	public List<Compte> obtenirListeComptesClient(ClientProxi clientProxi) {
-
+		// log pour le debut de la methode
 		CompteService.LOGGER.info(clientProxi.getConseiller().getPrenomConseiller() + " "
 				+ clientProxi.getConseiller().getNomConseiller() + " Entree dans la methode obtenirListComptesClients");
-
+		// declaration de la liste d'objets Compte obtenue au cours de la methode
+		// et retournee en fin de methode
 		List<Compte> listeComptes = null;
-		WebResource webResource = this.client.resource(this.debutUrl + "/obtenirComptesClient/" + clientProxi.getIdClient());
+		// construction d'une requete HTTP
+		// (notamment l'URL qui contient l'identifiant du client dont on veut les
+		// comptes)
+		WebResource webResource = client.resource(this.debutUrl + "/obtenirComptesClient/" + clientProxi.getIdClient());
+		// pas d'ajout de JSON a la requete ici car on n'envoit pas d'objet au WS
+		// envoi de la requete au webservice
+		// recuperation de la reponse
 		ClientResponse response = webResource.accept("application/json").get(ClientResponse.class);
-
-		this.retour = response.getEntity(String.class);
+		// extraction du JSOn de la reponse HTTP
+		retour = response.getEntity(String.class);
 		try {
-			listeComptes = this.mapper.readValue(this.retour, new TypeReference<List<Compte>>() {
+			// conversion du JSON en objet liste
+			listeComptes = mapper.readValue(retour, new TypeReference<List<Compte>>() {
 			});
 
 		} catch (IOException e) {
 			e.printStackTrace();
+			// log d'erreur en cas de catch
 			CompteService.LOGGER.error(clientProxi.getConseiller().getPrenomConseiller() + " "
 					+ clientProxi.getConseiller().getNomConseiller()
 					+ " Erreur : renvoi d'exception et echec de la methode");
 			return null;
 		}
+		// log de reussite
 		CompteService.LOGGER.info(clientProxi.getConseiller().getPrenomConseiller() + " "
 				+ clientProxi.getConseiller().getNomConseiller() + " Methode reussie : liste renvoyee");
 		return listeComptes;
 	}
 
+	/**
+	 * methode utilisant le WebService pour effectuer un virement entre deux comptes
+	 * donnes
+	 * 
+	 * @param compte1
+	 *            objet compte contenant l'identifiant du compte emetteur
+	 * @param compte2
+	 *            objet compte contenant l'identifiant du compte destinataire
+	 * @param montant
+	 *            valeur du montant transfere
+	 * @return boolean indiquant si le virement a pu avoir lieu ou non
+	 */
 	public boolean virement(Compte compte1, Compte compte2, Double montant) {
-
-		Transaction transaction = new Transaction(null,null,compte1.getIdCompte(),compte2.getIdCompte(),montant);
-		//		CompteService.LOGGER.info(compte1.getClient().getConseiller().getPrenomConseiller() + " " +compte1.getClient().getConseiller().getNomConseiller()
-		//		+ " Entree dans la methode virement");
+		// log pour le debut de la methode
+		Transaction transaction = new Transaction(null, null, compte1.getIdCompte(), compte2.getIdCompte(), montant);
+		CompteService.LOGGER.info(compte1.getClient().getConseiller().getPrenomConseiller() + " "
+				+ compte1.getClient().getConseiller().getNomConseiller() + " Entree dans la methode virement");
+		// declaration du boolen obtenue au cours de la methode
 		Boolean virementFait = false;
+		// Déclaration du flux JSON envoye au WebService
 		String envoie = null;
 		try {
-			envoie = this.mapper.writeValueAsString(transaction);
-			WebResource webResource = this.client.resource(this.debutUrl + "/virement");
+			// construction d'une requete HTTP
+			// (notamment l'URL qui ne contient pas de
+			// parametre ici )
+			envoie = mapper.writeValueAsString(transaction);
+			// construction d'une requete HTTP
+			// (notamment l'URL qui ne contient pas de parametre ici)
+			WebResource webResource = client.resource(this.debutUrl + "/virement");
+			// ajout du JSON a la requete
+			// envoi de la requete au webservice
+			// recuperation de la reponse
 			ClientResponse response = webResource.type("application/json").post(ClientResponse.class, envoie);
-			this.retour = response.getEntity(String.class);
-			virementFait = this.mapper.readValue(this.retour, Boolean.class);
+			// extraction du JSON de la reponse HTTP
+			retour = response.getEntity(String.class);
+			// Conversion du JSON en onjet de type Booleen
+			virementFait = mapper.readValue(retour, Boolean.class);
 		} catch (IOException e) {
 			e.printStackTrace();
-			CompteService.LOGGER.error(compte1.getClient().getConseiller().getPrenomConseiller() + " " +compte1.getClient().getConseiller().getNomConseiller()
+			// log en cas de catch
+			CompteService.LOGGER.error(compte1.getClient().getConseiller().getPrenomConseiller() + " "
+					+ compte1.getClient().getConseiller().getNomConseiller()
 					+ " Erreur : renvoi d'exception et echec de la methode");
 			return false;
 		}
 
-		if(virementFait.equals(true)) {
-			//			CompteService.LOGGER.info(compte1.getClient().getConseiller().getPrenomConseiller() + " " +compte1.getClient().getConseiller().getNomConseiller()
-			//					+ "virement reussi");
+		if (virementFait.equals(true)) {
+			// log de reussite si le Boleen obtenu est VRAI
+			CompteService.LOGGER.info(compte1.getClient().getConseiller().getPrenomConseiller() + " "
+					+ compte1.getClient().getConseiller().getNomConseiller() + "virement reussi");
 			return true;
-		}
-		else {
-			//			CompteService.LOGGER.info(compte1.getClient().getConseiller().getPrenomConseiller() + " " +compte1.getClient().getConseiller().getNomConseiller()
-			//					+ "echec du virement (booleen obtenu = FAUX)");
+		} else {
+			// log d'echec si le Booleen obtenu est FAUX
+			CompteService.LOGGER.info(compte1.getClient().getConseiller().getPrenomConseiller() + " "
+					+ compte1.getClient().getConseiller().getNomConseiller()
+					+ "echec du virement (booleen obtenu = FAUX)");
 			return false;
 		}
 	}
 
+	/**
+	 * methode qui utilise le WebService pour obtenir une listedes comptes qui sont
+	 * a decouvert (dans toute la banque)
+	 * 
+	 * @return liste d'objets de type Compte
+	 */
 	public List<Compte> obtenirComptesDecouvert() {
 		// log pour le debut de la methode
 		CompteService.LOGGER.info("gerant Entree dans la methode obtenirComptesDecouvert");
@@ -167,16 +228,16 @@ public class CompteService {
 		// (notamment l'URL qui ne contient pas de
 		// parametre ici car le traitement demande n'est pas associe a un client
 		// particulier)
-		WebResource webResource = this.client.resource(this.debutUrl + "/obtenirComptesDecouvert");
+		WebResource webResource = client.resource(this.debutUrl + "/obtenirComptesDecouvert");
 		// pas d'ajout de JSON a la requete ici car on n'envoit pas d'objet au WS
 		// envoi de la requete au webservice
 		// recuperation de la reponse
 		ClientResponse response = webResource.accept("application/json").get(ClientResponse.class);
 		// extraction du JSON de la reponse HTTP
-		this.retour = response.getEntity(String.class);
+		retour = response.getEntity(String.class);
 		try {
 			// conversion du JSON recupere en objet de type liste de Compte
-			listeComptes = this.mapper.readValue(this.retour, new TypeReference<List<Compte>>() {
+			listeComptes = mapper.readValue(retour, new TypeReference<List<Compte>>() {
 			});
 		} catch (IOException e) {
 			// creation d'un log d'erreur en cas de catch
@@ -198,4 +259,5 @@ public class CompteService {
 		// retour de l'objet obtenu
 		return listeComptes;
 	}
+
 }

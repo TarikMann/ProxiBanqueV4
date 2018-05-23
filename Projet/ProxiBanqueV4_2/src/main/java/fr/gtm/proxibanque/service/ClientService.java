@@ -16,18 +16,31 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import fr.gtm.proxibanque.domaine.ClientProxi;
 import fr.gtm.proxibanque.interfaces.IClientService;
 
+/**
+ * Classe de service utilisee par la couche de presentation, en ce qui concerne
+ * les operations liees a la gestion des clients. Pour effectuer les traitements
+ * correspondant, elle consomme le WebService.
+ * @author groupe 1
+ *
+ */
 public class ClientService {
 
 	/**
 	 * Propriete permettant aux methodes de cette classe de convertir des fichiers
 	 * JSON en objets java et vis-versa grace au framework Jackson
 	 */
+	
+	
+	
 	private ObjectMapper mapper = new ObjectMapper();
 	/**
 	 * Propriete permettant que ce programme soit un client HTTP pour envoyer des
 	 * requetes vers le web service consomme et de recevoir les reponses
 	 * correspondantes
 	 */
+	
+	
+	
 	Client client = Client.create();
 	/**
 	 * propriete correspondant aux chaines de caracteres en format JSON extraites
@@ -36,11 +49,15 @@ public class ClientService {
 	 */
 	String retour = null;
 
+	
+	
 	/**
 	 * Propriete permettant la journalisation (logs) des traitements de cette classe
 	 */
 	private static final Logger LOGGER = LoggerFactory.getLogger(ClientService.class);
 
+	
+	
 	/**
 	 * propriete etant la base fixe de l'url utilisee pour consommer le WebService
 	 * concernant le client (concatenee dans les methodes avec des suffixes adaptes
@@ -48,6 +65,8 @@ public class ClientService {
 	 */
 	private String debutUrl = "http://192.168.1.70:8080/webservice_1.0/api/clientWS";
 
+	
+	
 	/**
 	 * Methode qui s'adresse au WebService pour ajouter un client dans la base de
 	 * donnees
@@ -56,9 +75,12 @@ public class ClientService {
 	 *            objet client contenant les informations du client a ajouter
 	 * @return booleen qui indique si l'ajout a bien ete effectuee
 	 */
+	
+	
+	
 	public boolean creerClient(ClientProxi clientProxi) {
 		// log pour le debut de la methode
-		ClientService.LOGGER.info("conseiller n° " + clientProxi.getConseiller().getIdConseiller()
+		ClientService.LOGGER.info("conseiller nï¿½ " + clientProxi.getConseiller().getIdConseiller()
 				+ " Entree dans la methode creerClients");
 		// declaration d'un objet contenant une propriete booleene
 		Boolean cree;
@@ -84,24 +106,26 @@ public class ClientService {
 			e.printStackTrace();
 			// creation d'un log d'erreur en cas de catch
 			ClientService.LOGGER
-					.info("conseiller n° " + clientProxi.getConseiller().getIdConseiller() + " erreur : catch");
+					.info("conseiller nï¿½ " + clientProxi.getConseiller().getIdConseiller() + " erreur : catch");
 			// retour de la valeur FAUX en cas de catch
 			return false;
 		}
 		// retour de la methode en fonction de la valeur du booleen obtenu
 		if (cree.equals(false)) {
 			// log d'erreur dans le cas ou le booleen obtenu a la valeur FAUX
-			ClientService.LOGGER.info("conseiller n° " + clientProxi.getConseiller().getIdConseiller()
+			ClientService.LOGGER.info("conseiller nï¿½ " + clientProxi.getConseiller().getIdConseiller()
 					+ " erreur : booleen retourne = FAUX");
 			return false;
 		} else {
 			// log de reussite de la methode si le booleen obtenu a la valeur VRAI
 			ClientService.LOGGER
-					.info("conseiller n° " + clientProxi.getConseiller().getIdConseiller() + " client cree");
+					.info("conseiller nï¿½ " + clientProxi.getConseiller().getIdConseiller() + " client cree");
 			return true;
 		}
 	}
 
+	
+	
 	/**
 	 * Methode qui s'adresse au WebService pour recuperer les information sur un
 	 * client a partir de son identifiant
@@ -141,13 +165,15 @@ public class ClientService {
 		} else {
 			// log de reussite de la methode dans le cas ou l'objet obtenu est non nul
 			ClientService.LOGGER
-					.info("conseiller n° " + clientProxi.getConseiller().getIdConseiller() + " client obtenu");
+					.info("conseiller nï¿½ " + clientProxi.getConseiller().getIdConseiller() + " client obtenu");
 		}
 		// retour de l'objet obtenu
 		return clientProxi;
 
 	}
 
+	
+	
 	/**
 	 * Methode qui s'adresse au WebService pour modifier un client present dans la
 	 * base de donnees
@@ -159,7 +185,7 @@ public class ClientService {
 	 */
 	public boolean modifierClient(ClientProxi clientAller) {
 		// log pour le debut de la methode
-		ClientService.LOGGER.info("conseiller n° " + clientAller.getConseiller().getIdConseiller()
+		ClientService.LOGGER.info("conseiller nï¿½ " + clientAller.getConseiller().getIdConseiller()
 				+ " Entree dans la methode modifierClients");
 		// declaration de l'objet ClientProxi obtenu au cours de la methode
 		ClientProxi clientRetour = null;
@@ -186,7 +212,7 @@ public class ClientService {
 			e.printStackTrace();
 			// creation d'un log d'erreur en cas de catch
 			ClientService.LOGGER
-					.info("conseiller n° " + clientAller.getConseiller().getIdConseiller() + " erreur : catch");
+					.info("conseiller nï¿½ " + clientAller.getConseiller().getIdConseiller() + " erreur : catch");
 			// retour de la valeur FAUX en cas de catch
 			return false;
 		}
@@ -194,19 +220,19 @@ public class ClientService {
 
 			// log d'erreur dans le cas ou l'objet obtenu est nul
 			ClientService.LOGGER
-					.info("conseiller n° " + clientAller.getConseiller().getIdConseiller() + " erreur : ClientProxi retourne = NULL");
+					.info("conseiller nï¿½ " + clientAller.getConseiller().getIdConseiller() + " erreur : ClientProxi retourne = NULL");
 			// retour de la valeur FAUX si l'objet obtenu est nul
 			return false;
 		} else {
 			if (clientRetour.getPrenomClient().equals(clientAller.getPrenomClient()) && clientRetour.getNomClient().equals(clientAller.getNomClient()) && clientRetour.getAdresseClient().equals(clientAller.getAdresseClient()) && clientRetour.getEmailClient().equals(clientAller.getEmailClient())) {
 				// log de reussite de la methode si l'objet obtenu est non nul
 				ClientService.LOGGER
-						.info("conseiller n° " + clientAller.getConseiller().getIdConseiller() + " client modifie");
+						.info("conseiller nï¿½ " + clientAller.getConseiller().getIdConseiller() + " client modifie");
 				// retour de la valeur VRAI si l'objet obtenu n'est pas nul
 				return true;
 			} else {
 				// log d'erreur dans le cas ou l'objet obtenu different de l'objet envoye
-				ClientService.LOGGER.info("conseiller n° " + clientAller.getConseiller().getIdConseiller()
+				ClientService.LOGGER.info("conseiller nï¿½ " + clientAller.getConseiller().getIdConseiller()
 						+ " erreur : ClientProxi retourne different de celui envoye");
 				return false;
 			}
@@ -214,6 +240,8 @@ public class ClientService {
 
 	}
 
+	
+	
 	/**
 	 * methode qui s'adresse au WebService pour suprimmer un client de la base de
 	 * donnees
@@ -224,7 +252,7 @@ public class ClientService {
 	 */
 	public boolean supprimerClient(ClientProxi clientAller) {
 		// log pour le debut de la methode
-		ClientService.LOGGER.info("conseiller n° " + clientAller.getConseiller().getIdConseiller()
+		ClientService.LOGGER.info("conseiller nï¿½ " + clientAller.getConseiller().getIdConseiller()
 				+ " Entree dans la methode creerClients");
 		// declaration de l'objet ClientProxi obtenu au cours de la methode
 		Boolean supprime = false;
@@ -244,13 +272,13 @@ public class ClientService {
 			e.printStackTrace();
 			// creation d'un log d'erreur en cas de catch
 			ClientService.LOGGER
-					.info("conseiller n° " + clientAller.getConseiller().getIdConseiller() + " erreur : catch");
+					.info("conseiller nï¿½ " + clientAller.getConseiller().getIdConseiller() + " erreur : catch");
 			// retour de la valeur FAUX en cas de catch
 			return false;
 		}
 		if (supprime.equals(null)) {
 			// log d'erreur dans le cas ou l'objet Boolean obtenu est nul
-			ClientService.LOGGER.info("conseiller n° " + clientAller.getConseiller().getIdConseiller()
+			ClientService.LOGGER.info("conseiller nï¿½ " + clientAller.getConseiller().getIdConseiller()
 					+ " erreur : booleen retourne = NULL");
 			// retour de la valeur FAUX si le booleen obtenu est nul
 			return false;
@@ -258,19 +286,21 @@ public class ClientService {
 			if(supprime.equals(true)) {
 			// log de reussite de la methode si l'objet obtenu est non nul
 			ClientService.LOGGER
-					.info("conseiller n° " + clientAller.getConseiller().getIdConseiller() + " client supprime");
+					.info("conseiller nï¿½ " + clientAller.getConseiller().getIdConseiller() + " client supprime");
 			// retour de la valeur VRAI si le booleen obtenu est VRAI
 			return true;
 			}
 			else {
 				ClientService.LOGGER
-				.error("conseiller n° " + clientAller.getConseiller().getIdConseiller() + " client non supprime");
+				.error("conseiller nï¿½ " + clientAller.getConseiller().getIdConseiller() + " client non supprime");
 		// retour de la valeur FAUX si le booleen obtenu est FAUX
 		return false;
 			}
 		}
 	}
 
+	
+	
 	/**
 	 * methode qui s'adresse au WebService pour recuperer une liste de l'integralite
 	 * des clients de la banque (tous conseillers confondus)
