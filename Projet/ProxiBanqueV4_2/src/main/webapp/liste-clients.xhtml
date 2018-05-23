@@ -80,14 +80,14 @@
 
 								<h:commandButton class="btn btn-secondary btn-sm"
 									id="affichageclient-button-gestion-mod" value="modifier"
-									action="modification_client" />
+									action="#{clientProxiBean.affichermodifierClient(client)}"  />
 
 								<h:commandButton
 									class=" btn 
 								btn-secondary 
 								btn-sm"
 									id="affichageclient-button-gestion-sup" value="supprimer"
-									action="#{clientProxiBean.supprimerClient}" />
+									action="#{clientProxiBean.supprimerClient(client)}" />
 
 							</p:column>
 

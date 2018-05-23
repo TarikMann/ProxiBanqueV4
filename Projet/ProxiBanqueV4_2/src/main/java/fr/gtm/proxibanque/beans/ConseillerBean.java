@@ -16,7 +16,7 @@ public class ConseillerBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	// Proprietés
-	// =======================================================	
+	// =======================================================
 	private Conseiller conseiller = new Conseiller(1, "xxx", "xxx", "xxx", "xxx");
 
 	private Integer idConseiller;
@@ -56,7 +56,7 @@ public class ConseillerBean implements Serializable {
 	// =======================================================
 
 	public Integer getIdConseiller() {
-		return idConseiller;
+		return this.idConseiller;
 	}
 
 	public void setIdConseiller(Integer idConseiller) {
@@ -64,7 +64,7 @@ public class ConseillerBean implements Serializable {
 	}
 
 	public String getNomConseiller() {
-		return nomConseiller;
+		return this.nomConseiller;
 	}
 
 	public void setNomConseiller(String nomConseiller) {
@@ -72,7 +72,7 @@ public class ConseillerBean implements Serializable {
 	}
 
 	public String getPrenomConseiller() {
-		return prenomConseiller;
+		return this.prenomConseiller;
 	}
 
 	public void setPrenomConseiller(String prenomConseiller) {
@@ -80,7 +80,7 @@ public class ConseillerBean implements Serializable {
 	}
 
 	public String getLogin() {
-		return login;
+		return this.login;
 	}
 
 	public void setLogin(String login) {
@@ -88,7 +88,7 @@ public class ConseillerBean implements Serializable {
 	}
 
 	public String getPassword() {
-		return password;
+		return this.password;
 	}
 
 	public void setPassword(String password) {
@@ -96,7 +96,7 @@ public class ConseillerBean implements Serializable {
 	}
 
 	public List<ClientProxi> getClientsConseiller() {
-		return clientsConseiller;
+		return this.clientsConseiller;
 	}
 
 	public void setClientsConseiller(List<ClientProxi> clientsConseiller) {
@@ -109,7 +109,7 @@ public class ConseillerBean implements Serializable {
 	/**
 	 * méthode qui permet l'authentification de l'utilisateur via un appel à la
 	 * méthode authentification() de conseillerService
-	 * 
+	 *
 	 * @param login
 	 *            et password de l'utilisateur
 	 * @return boolean qui valide ou non l'authentification
@@ -132,7 +132,7 @@ public class ConseillerBean implements Serializable {
 	/**
 	 * méthode qui permet la lecture de la liste des clients d'un conseillervia un
 	 * appel à la méthode authentification() de conseillerService
-	 * 
+	 *
 	 * @param Integer
 	 *            id du conseiller idConseiller dont on souhaite lire la liste des
 	 *            clients
@@ -140,7 +140,7 @@ public class ConseillerBean implements Serializable {
 	 */
 	public void obtenirListeClientsConseiller() {
 		ConseillerService conseillerService = new ConseillerService();
-		this.clientsConseiller = conseillerService.obtenirListeClientsConseiller(conseiller);
+		this.clientsConseiller = conseillerService.obtenirListeClientsConseiller(this.conseiller);
 
 	}
 

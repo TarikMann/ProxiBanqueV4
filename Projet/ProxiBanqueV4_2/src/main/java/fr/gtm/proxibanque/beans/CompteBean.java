@@ -136,10 +136,8 @@ public class CompteBean {
 		// recuperer l'idClient
 
 		System.out.println("val recup dans obtenir ListeDesCompte : " + monClient);
-		// Cast de String a Integer
-		Integer IdClient = monClient.getIdClient();
-		// Remplir l'objet ClientProxi
-		System.out.println("val idClient dans obtenir ListeDesCompte : " + IdClient);
+		this.client = monClient;
+
 
 
 		// remplir liste comptes

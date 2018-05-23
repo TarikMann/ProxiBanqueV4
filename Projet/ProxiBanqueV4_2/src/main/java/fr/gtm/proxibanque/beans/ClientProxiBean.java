@@ -27,6 +27,7 @@ public class ClientProxiBean implements Serializable {
 	private List<Compte> comptesClient;
 	private List<ClientProxi> listClient;
 
+	ClientService clientService = new ClientService();
 	// constructeurs
 	// =======================================================
 
@@ -96,10 +97,10 @@ public class ClientProxiBean implements Serializable {
 	 */
 	public void creerClient(ClientProxi monClient) {
 
-		ClientService clientService = new ClientService();
+
 		System.out.println("Nom Client ajout : " + monClient.getNomClient());
 		this.clientProxi.setConseiller(this.conseiller);
-		clientService.creerClient(this.clientProxi);
+		this.clientService.creerClient(this.clientProxi);
 	}
 
 	// ------------
@@ -113,8 +114,8 @@ public class ClientProxiBean implements Serializable {
 	 * @return clientProxi : objet de type ClientProxi
 	 */
 	public ClientProxi obtenirClient(Integer idClientProxi) {
-		ClientService clientService = new ClientService();
-		return clientService.obtenirClient(idClientProxi);
+
+		return this.clientService.obtenirClient(idClientProxi);
 		// TODO vérifier le nommage de clientProxiService et ses méthodes
 	}
 
@@ -128,9 +129,16 @@ public class ClientProxiBean implements Serializable {
 	 *            : objet de type ClientProxi
 	 * @return boolean qui valide ou non la modification en base
 	 */
-	public boolean modifierClient(ClientProxi clientProxi) {
-		ClientService clientService = new ClientService();
-		return clientService.modifierClient(clientProxi);
+	public Object modifierClient(ClientProxi clientProxirec) {
+
+
+		//		clientProxirec.setConseiller(this.conseiller);
+		//		System.out.println("Mon Client Modifier : " + clientProxirec);
+		this.clientProxi.setConseiller(this.conseiller);
+		System.out.println("Mon Client Modifier proxi : " + this.clientProxi);
+
+		this.clientService.modifierClient(this.clientProxi);
+		return "liste-client";
 		// TODO vérifier le nommage de clientProxiService et ses méthodes
 	}
 
@@ -171,6 +179,11 @@ public class ClientProxiBean implements Serializable {
 		return "liste-clients.xhtml";
 		// TODO vérifier le nommage de clientProxiService et ses méthodes
 
+	}
+
+	public Object affichermodifierClient(ClientProxi monClient) {
+		this.clientProxi = monClient;
+		return "modification-client";
 	}
 
 }
