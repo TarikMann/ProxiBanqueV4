@@ -1,32 +1,34 @@
 package fr.gtm.proxibanque.beans;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 
 import fr.gtm.proxibanque.domaine.ClientProxi;
 import fr.gtm.proxibanque.domaine.Conseiller;
 import fr.gtm.proxibanque.service.ConseillerService;
 
 @ManagedBean
+
+@SessionScoped
 public class ConseillerBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
 	// Proprietés
 	// =======================================================
-	private Conseiller conseiller = new Conseiller(1, "xxx", "xxx", "xxx", "xxx");
 
-	private Integer idConseiller;
-	private String nomConseiller;
-	private String prenomConseiller;
+	private Conseiller conseiller;
 	private String login;
 	private String password;
 	private List<ClientProxi> clientsConseiller;
 
-	public ConseillerService conseillerService;
+	public ConseillerService conseillerService = new ConseillerService();
+
+
+
 
 	// constructeurs
 	// =======================================================
@@ -36,48 +38,30 @@ public class ConseillerBean implements Serializable {
 	 */
 	public ConseillerBean() {
 		super();
+		this.conseiller = new Conseiller();
+	}
+
+	public ConseillerBean(Conseiller conseiller, String login, String password, List<ClientProxi> clientsConseiller,
+			ConseillerService conseillerService) {
+		super();
+		this.conseiller = conseiller;
+		this.login = login;
+		this.password = password;
+		this.clientsConseiller = clientsConseiller;
+		this.conseillerService = conseillerService;
 	}
 
 	/**
 	 * constructeur
 	 */
-	public ConseillerBean(Integer idConseiller, String nomConseiller, String prenomConseiller, String login,
-			String password) {
-		super();
-		this.idConseiller = idConseiller;
-		this.nomConseiller = nomConseiller;
-		this.prenomConseiller = prenomConseiller;
-		this.login = login;
-		this.password = password;
-		this.clientsConseiller = new ArrayList<ClientProxi>();
-	}
 
 	// getters & setters
 	// =======================================================
 
-	public Integer getIdConseiller() {
-		return this.idConseiller;
+	public List<ClientProxi> getClientsConseiller() {
+		return this.clientsConseiller;
 	}
 
-	public void setIdConseiller(Integer idConseiller) {
-		this.idConseiller = idConseiller;
-	}
-
-	public String getNomConseiller() {
-		return this.nomConseiller;
-	}
-
-	public void setNomConseiller(String nomConseiller) {
-		this.nomConseiller = nomConseiller;
-	}
-
-	public String getPrenomConseiller() {
-		return this.prenomConseiller;
-	}
-
-	public void setPrenomConseiller(String prenomConseiller) {
-		this.prenomConseiller = prenomConseiller;
-	}
 
 	public String getLogin() {
 		return this.login;
@@ -95,8 +79,18 @@ public class ConseillerBean implements Serializable {
 		this.password = password;
 	}
 
-	public List<ClientProxi> getClientsConseiller() {
-		return this.clientsConseiller;
+	public ConseillerBean(Conseiller conseiller, List<ClientProxi> clientsConseiller) {
+		super();
+		this.conseiller = conseiller;
+		this.clientsConseiller = clientsConseiller;
+	}
+
+	public Conseiller getConseiller() {
+		return this.conseiller;
+	}
+
+	public void setConseiller(Conseiller conseiller) {
+		this.conseiller = conseiller;
 	}
 
 	public void setClientsConseiller(List<ClientProxi> clientsConseiller) {
@@ -141,6 +135,32 @@ public class ConseillerBean implements Serializable {
 	public void obtenirListeClientsConseiller() {
 		ConseillerService conseillerService = new ConseillerService();
 		this.clientsConseiller = conseillerService.obtenirListeClientsConseiller(this.conseiller);
+
+	}
+
+	public Object deconnexion() {
+
+		return "index";
+	}
+
+
+	public Object authentification() {
+		System.out.println(this.login);
+		this.conseiller = new Conseiller(this.login, this.password);
+		//		this.conseiller.setLogin(valLogin);
+		//		this.conseiller.setPassword(valPassword);
+		System.out.println(this.conseiller.getLogin());
+		//		System.out.println("1er conseiller" + this.conseiller.getLogin());
+		//		System.out.println("2eme conseiller" + monConseiller.getLogin());
+		System.out.println("1er conseiller" + this.conseiller.getPassword());
+		boolean authentifie = this.conseillerService.authentification(this.conseiller);
+		System.out.println(authentifie);
+		if (authentifie == true) {
+			// partage du conseiller
+			return "liste-clients";
+		} else {
+			return "Authentification";
+		}
 
 	}
 

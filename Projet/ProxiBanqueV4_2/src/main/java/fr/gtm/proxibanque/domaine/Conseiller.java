@@ -1,7 +1,5 @@
 package fr.gtm.proxibanque.domaine;
 
-import fr.gtm.proxibanque.domaine.ClientProxi;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,8 +32,15 @@ public class Conseiller {
 		this.clientsConseiller = new ArrayList<ClientProxi>();
 	}
 
+	public Conseiller(String login,	String password) {
+
+		this.login = login;
+		this.password = password;
+
+	}
+
 	public Integer getIdConseiller() {
-		return idConseiller;
+		return this.idConseiller;
 	}
 
 	public void setIdConseiller(Integer idConseiller) {
@@ -43,7 +48,7 @@ public class Conseiller {
 	}
 
 	public String getNomConseiller() {
-		return nomConseiller;
+		return this.nomConseiller;
 	}
 
 	public void setNomConseiller(String nomConseiller) {
@@ -51,7 +56,7 @@ public class Conseiller {
 	}
 
 	public String getPrenomConseiller() {
-		return prenomConseiller;
+		return this.prenomConseiller;
 	}
 
 	public void setPrenomConseiller(String prenomConseiller) {
@@ -59,7 +64,7 @@ public class Conseiller {
 	}
 
 	public String getLogin() {
-		return login;
+		return this.login;
 	}
 
 	public void setLogin(String login) {
@@ -67,7 +72,7 @@ public class Conseiller {
 	}
 
 	public String getPassword() {
-		return password;
+		return this.password;
 	}
 
 	public void setPassword(String password) {
@@ -75,7 +80,7 @@ public class Conseiller {
 	}
 
 	public List<ClientProxi> getClientsConseiller() {
-		return clientsConseiller;
+		return this.clientsConseiller;
 	}
 
 	public void setClientsConseiller(List<ClientProxi> clientsConseiller) {
