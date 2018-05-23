@@ -37,58 +37,62 @@
 
 				<div class="row">
 
+					<h:form id="formDataTable">
+						<p:dataTable id="affichageclient-table" var="client"
+							value="#{clientProxiBean.listClient}">
+							<p:column headerText="nom">
+								<h:outputText value="#{client.nomClient} " />
+							</p:column>
 
-					<p:dataTable id="affichageclient-table" var="client"
-						value="#{clientProxiBean.listClient}">
-						<p:column headerText="nom">
-							<h:outputText value="#{client.nomClient} " />
-						</p:column>
+							<p:column headerText="prenom">
+								<h:outputText value="#{client.prenomClient}" />
+							</p:column>
 
-						<p:column headerText="prenom">
-							<h:outputText value="#{client.prenomClient}" />
-						</p:column>
+							<p:column headerText="email">
+								<h:outputText value="#{client.emailClient}" />
+							</p:column>
 
-						<p:column headerText="email">
-							<h:outputText value="#{client.emailClient}" />
-						</p:column>
+							<p:column headerText="adresse">
+								<h:outputText value="#{client.adresseClient}" />
+							</p:column>
 
-						<p:column headerText="adresse">
-							<h:outputText value="#{client.adresseClient}" />
-						</p:column>
+							<p:column headerText="gestion">
 
-						<p:column headerText="gestion">
+								<f:facet name="header">gestion</f:facet>
 
-							<f:facet name="header">gestion</f:facet>
+								<!-- 							<h:commandButton class="btn btn-secondary btn-sm" -->
+								<!-- 								id="affichageclient-button-gestion" value="liste des comptes" -->
+								<!-- 								onclick="window.location.href='/ProxiBanqueV4_2/faces/liste-comptes-client.xhtml'; return false;" -->
+								<!-- 								action="/liste-comptes-client.xhtml" /> -->
 
-							<!-- 							<h:commandButton class="btn btn-secondary btn-sm" -->
-							<!-- 								id="affichageclient-button-gestion" value="liste des comptes" -->
-							<!-- 								onclick="window.location.href='/ProxiBanqueV4_2/faces/liste-comptes-client.xhtml'; return false;" -->
-							<!-- 								action="/liste-comptes-client.xhtml" /> -->
+								<p:commandButton id="affichageclient-button-gestion-compte"
+									value="  liste des comptes"
+									action="#{compteBean.obtenirlisteDesCompte(client)}" />
 
-							<p:commandButton id="affichageclient-button-gestion"
-								value=" #{client.idClient}  liste des comptes"
-								onclick="window.location.href='/ProxiBanqueV4_2/faces/liste-comptes-client.xhtml'; return false;">
-								<f:param name="idClient" value="#{client.idClient}" />
-							</p:commandButton>
-							<h:commandButton class="btn btn-secondary btn-sm"
-								id="affichageclient-button-gestion" value="virement"
-								action="virement" />
 
-							<h:commandButton class="btn btn-secondary btn-sm"
-								id="affichageclient-button-gestion" value="modifier"
-								action="modification_client" />
 
-							<h:commandButton
-								class=" btn 
+
+
+
+								<h:commandButton class="btn btn-secondary btn-sm"
+									id="affichageclient-button-gestion" value="virement"
+									action="#{compteBean.affichagevirement(client)}" />
+
+								<h:commandButton class="btn btn-secondary btn-sm"
+									id="affichageclient-button-gestion-mod" value="modifier"
+									action="#{clientProxiBean.affichermodifierClient(client)}"  />
+
+								<h:commandButton
+									class=" btn 
 								btn-secondary 
 								btn-sm"
-								id="affichageclient-button-gestion" value="supprimer"
-								action="#{clientProxiBean.supprimerClient}" />
+									id="affichageclient-button-gestion-sup" value="supprimer"
+									action="#{clientProxiBean.supprimerClient(client)}" />
 
-						</p:column>
+							</p:column>
 
-					</p:dataTable>
-
+						</p:dataTable>
+					</h:form>
 				</div>
 
 

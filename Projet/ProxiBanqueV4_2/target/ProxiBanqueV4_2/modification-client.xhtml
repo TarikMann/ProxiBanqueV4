@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+
+</h:head>
+
+<h:body>
+
+	<ui:composition template="/template/common-layout.xhtml">
+
+		<ui:define name="section">
+
+			<div class="container-fluid">
+				<div class="row">
+					<!-- column 1 -->
+					<div class="col-sm-2"></div>
+
+					<!-- column 2 -->
+					<div class="col-sm-8">
+
+						<h2>Modification des informations du client #{clientProxiBean.clientProxi.nomClient} #{clientProxiBean.clientProxi.prenomClient} </h2>
+
+						<p>Veuillez saisir les informations requises</p>
+
+						<h:form id="modification-client-form">
+
+
+							<div class="form-group">
+								<h:inputText type="hidden" id="idClient" value="#{clientProxiBean.clientProxi.idClient}" />
+							</div>
+
+							<div class="form-group">
+								<h:outputText for="inputNom" value="nom" />
+								<h:inputText type="text" class="form-control" id="nomClient" value="#{clientProxiBean.clientProxi.nomClient}"
+									placeholder="nom" required="true"/>
+							</div>
+
+							<div class="form-group">
+								<h:outputText for="inputPrenom" value="prenom" />
+								<h:inputText type="text" class="form-control" id="prenomClient" value="#{clientProxiBean.clientProxi.prenomClient}"
+									placeholder="prénom" required="true"/>
+							</div>
+
+							<div class="form-group">
+								<h:outputText for="inputEmail" value="email" />
+								<h:inputText type="email" class="form-control" id="emailClient" value="#{clientProxiBean.clientProxi.emailClient}"
+									placeholder="email" required="true"/>
+							</div>
+
+							<div class="form-group">
+								<h:outputText for="inputAdresse" value="adresse" />
+								<h:inputText type="text" class="form-control" id="adresseClient"  value="#{clientProxiBean.clientProxi.adresseClient}"
+									placeholder="adresse" required="true"/>
+							</div>
+
+							<h:commandButton class="btn btn-primary" value="modifier"
+								action="#{clientProxiBean.modifierClient(clientProxi)}" />
+
+						</h:form>
+
+					</div>
+
+					<!-- column 3 -->
+					<div class="col-sm-2"></div>
+
+				</div>
+			</div>
+
+		</ui:define>
+
+	</ui:composition>
+
+</h:body>
+
+</html>

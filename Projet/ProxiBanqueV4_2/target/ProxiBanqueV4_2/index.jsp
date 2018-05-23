@@ -9,7 +9,7 @@
 <body>
 
 	<!-- Tag de redirection vers les pages xhtml de l'application. -->
-	<jsp:forward page="faces/liste-clients.xhtml"></jsp:forward>
+	<jsp:forward page="faces/authentification.xhtml"></jsp:forward>
 
 
 </body>

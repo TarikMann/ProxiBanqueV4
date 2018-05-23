@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+</h:head>
+
+<h:body>
+
+	<ui:composition template="template/common-layout.xhtml">
+
+		<ui:define name="section">
+
+			<div id="affichage-comptes-client-entete">
+
+				<h2>liste des comptes</h2>
+
+				<h3>client : #{compteBean.client.nomClient}  #{compteBean.client.prenomClient}  </h3>
+
+			</div>
+			<div>
+			<h:form id="formDataTable">
+				<p:dataTable id="affichage-comptes-client-table" var="compte"
+					value="#{compteBean.listeComptes}">
+					<p:column headerText="numéro">
+						<h:outputText value="#{compte.numCompte}" />
+					</p:column>
+
+					<p:column headerText="solde">
+						<h:outputText value="#{compte.soldeCompte} Euros " />
+					</p:column>
+
+					<p:column headerText="type de compte">
+						<h:outputText value="#{compte.typeCompte}" />
+					</p:column>
+
+				</p:dataTable>
+					</h:form>
+			</div>
+		</ui:define>
+
+	</ui:composition>
+
+</h:body>
+
+</html>

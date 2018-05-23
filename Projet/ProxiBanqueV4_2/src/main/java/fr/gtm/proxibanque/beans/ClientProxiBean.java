@@ -2,9 +2,11 @@ package fr.gtm.proxibanque.beans;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
+import javax.faces.context.FacesContext;
 
 import fr.gtm.proxibanque.domaine.ClientProxi;
 import fr.gtm.proxibanque.domaine.Compte;
@@ -76,12 +78,14 @@ public class ClientProxiBean implements Serializable {
 	public void setComptesClient(List<Compte> comptesClient) {
 		this.comptesClient = comptesClient;
 	}
+	private Map<String, Object> sessionMap = FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
 
 	// méthodes
 	// =======================================================
 	@PostConstruct
 	public void init() {
-		this.conseiller = new Conseiller(1, "tata", "titi", "toto", "tutu");
+
+		this.conseiller = (Conseiller) this.sessionMap.get("monConseiller");
 		ClientService clientService = new ClientService();
 		this.listClient = clientService.obtenirClientsBanque();
 		System.out.println("La liste des clients : " + this.listClient);

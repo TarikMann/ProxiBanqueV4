@@ -2,9 +2,11 @@ package fr.gtm.proxibanque.beans;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Map;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 
 import fr.gtm.proxibanque.domaine.ClientProxi;
 import fr.gtm.proxibanque.domaine.Conseiller;
@@ -143,6 +145,7 @@ public class ConseillerBean implements Serializable {
 		return "index";
 	}
 
+	private Map<String, Object> sessionMap = FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
 
 	public Object authentification() {
 		System.out.println(this.login);
@@ -154,8 +157,14 @@ public class ConseillerBean implements Serializable {
 		//		System.out.println("2eme conseiller" + monConseiller.getLogin());
 		System.out.println("1er conseiller" + this.conseiller.getPassword());
 		boolean authentifie = this.conseillerService.authentification(this.conseiller);
+
+
 		System.out.println(authentifie);
 		if (authentifie == true) {
+
+			Conseiller monConseillerUser = this.conseillerService.recuperationConseiller(this.conseiller);
+			System.out.println(monConseillerUser.getNomConseiller());
+			this.sessionMap.put("monConseiller", monConseillerUser);
 			// partage du conseiller
 			return "liste-clients";
 		} else {

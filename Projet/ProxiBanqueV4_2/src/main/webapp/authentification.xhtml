@@ -33,23 +33,21 @@
 						<p>Merci de vous identifier</p>
 
 						<h:form id="login-form">
-<h:messages style="color:red"></h:messages>
+							<h:messages style="color:red"></h:messages>
 							<div class="form-group">
-							<label for="inputLogin">Identifiant: </label>
-								<h:inputText class="form-control" id="login"
-									required="true"
+								<label for="inputLogin">Identifiant: </label>
+								<h:inputText class="form-control" id="login" required="true"
 									requiredMessage="merci d'entrer votre mot de passe"
-									placeholder="Votre login est requis, merci." 
-									value = "#{conseillerBean.login}"/>
+									placeholder="Votre login est requis, merci."
+									value="#{conseillerBean.login}" />
 							</div>
-							
+
 							<div class="form-group">
-							<label for="inputPassword">Mot de passe: </label>
-								<h:inputText class="form-control" id="password"
-									required="true"
+								<label for="inputPassword">Mot de passe: </label>
+								<h:inputText class="form-control" id="password" required="true"
 									requiredMessage="Votre mot de passe est requis, merci."
 									placeholder="entrez votre mot de passe"
-									value = "#{conseillerBean.password}">
+									value="#{conseillerBean.password}">
 								</h:inputText>
 							</div>
 
