@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
@@ -22,15 +23,13 @@ public class ConseillerBean implements Serializable {
 	// Proprietés
 	// =======================================================
 
-	private Conseiller conseiller;
+	public Conseiller conseiller;
 	private String login;
 	private String password;
 	private List<ClientProxi> clientsConseiller;
 
 	public ConseillerService conseillerService = new ConseillerService();
-
-
-
+	public ClientProxiBean monClientProxi = new ClientProxiBean();
 
 	// constructeurs
 	// =======================================================
@@ -63,7 +62,6 @@ public class ConseillerBean implements Serializable {
 	public List<ClientProxi> getClientsConseiller() {
 		return this.clientsConseiller;
 	}
-
 
 	public String getLogin() {
 		return this.login;
@@ -102,37 +100,13 @@ public class ConseillerBean implements Serializable {
 	// méthodes
 	// =======================================================
 
-	/**
-	 * méthode qui permet l'authentification de l'utilisateur via un appel à la
-	 * méthode authentification() de conseillerService
-	 *
-	 * @param login
-	 *            et password de l'utilisateur
-	 * @return boolean qui valide ou non l'authentification
-	 */
-	// public String authentification() {
-	//
-	// String casNavigation = "null";
-	// Integer ret = 0;
-	// ret = conseillerService.authentification(login, password);
-	// if (ret = 1) {
-	// // validation de l'authentification
-	// return casNavigation = "succes";
-	// } else {
-	// return "echec";
-	// }
-	// }
-
 	// ------------
 
 	/**
 	 * méthode qui permet la lecture de la liste des clients d'un conseillervia un
 	 * appel à la méthode authentification() de conseillerService
 	 *
-	 * @param Integer
-	 *            id du conseiller idConseiller dont on souhaite lire la liste des
-	 *            clients
-	 * @return boolean qui valide ou non l'authentification
+	 *
 	 */
 	public void obtenirListeClientsConseiller() {
 		ConseillerService conseillerService = new ConseillerService();
@@ -150,25 +124,26 @@ public class ConseillerBean implements Serializable {
 	public Object authentification() {
 		System.out.println(this.login);
 		this.conseiller = new Conseiller(this.login, this.password);
-		//		this.conseiller.setLogin(valLogin);
-		//		this.conseiller.setPassword(valPassword);
+
 		System.out.println(this.conseiller.getLogin());
-		//		System.out.println("1er conseiller" + this.conseiller.getLogin());
-		//		System.out.println("2eme conseiller" + monConseiller.getLogin());
+
 		System.out.println("1er conseiller" + this.conseiller.getPassword());
 		boolean authentifie = this.conseillerService.authentification(this.conseiller);
-
 
 		System.out.println(authentifie);
 		if (authentifie == true) {
 
 			Conseiller monConseillerUser = this.conseillerService.recuperationConseiller(this.conseiller);
-			System.out.println(monConseillerUser.getNomConseiller());
-			this.sessionMap.put("monConseiller", monConseillerUser);
+			System.out.println(monConseillerUser.getNomConseiller() + monConseillerUser.getIdConseiller());
+			//			this.monClientProxi.obtenirListClient(monConseillerUser);
+			this.monClientProxi.obtenirListClient(monConseillerUser);
 			// partage du conseiller
 			return "liste-clients";
 		} else {
-			return "Authentification";
+			FacesContext context = FacesContext.getCurrentInstance();
+			context.addMessage("messageError", new FacesMessage(FacesMessage.SEVERITY_ERROR,"Login et mot de passe erroné","Authentification"));
+
+			return "authentification.xhtml";
 		}
 
 	}

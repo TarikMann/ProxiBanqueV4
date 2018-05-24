@@ -87,4 +87,11 @@ public class Conseiller {
 		this.clientsConseiller = clientsConseiller;
 	}
 
+	@Override
+	public String toString() {
+		return "Conseiller [id=" + this.idConseiller + ", login=" + this.login + ", password=" + this.password + ", Nom=" + this.nomConseiller + ", Prenom=" + this.prenomConseiller + "]";
+	}
+
+
+
 }

@@ -61,7 +61,7 @@ public class ClientService {
 	 * concernant le client (concatenee dans les methodes avec des suffixes adaptes
 	 * aux operations realisees)
 	 */
-	private String debutUrl = "http://192.168.1.70:8080/webservice_1.0/api/clientWS";
+	private String debutUrl = "http://192.168.1.19:8080/webservice_1.0/api/clientWS";
 
 
 

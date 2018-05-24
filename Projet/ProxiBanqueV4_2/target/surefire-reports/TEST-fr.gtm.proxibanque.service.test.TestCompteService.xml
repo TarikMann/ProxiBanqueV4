@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="4" failures="0" name="fr.gtm.proxibanque.service.test.TestCompteService" time="7.225" errors="0" skipped="0">
+<testsuite tests="4" failures="0" name="fr.gtm.proxibanque.service.test.TestCompteService" time="0.529" errors="0" skipped="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="java.vm.version" value="9.0.4+11"/>
@@ -27,7 +27,7 @@
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="user.variant" value=""/>
     <property name="os.name" value="Windows 7"/>
-    <property name="classworlds.conf" value="C:\formationJava\Spring\.metadata\.plugins\org.eclipse.m2e.launching\launches\m2conf4789782760298809547.tmp"/>
+    <property name="classworlds.conf" value="C:\formationJava\Spring\.metadata\.plugins\org.eclipse.m2e.launching\launches\m2conf8768452647911239415.tmp"/>
     <property name="sun.jnu.encoding" value="Cp1252"/>
     <property name="java.library.path" value="C:\Program Files\Java\jdk-9.0.4\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:/Program Files/Java/jre1.8.0_144/bin/server;C:/Program Files/Java/jre1.8.0_144/bin;C:/Program Files/Java/jre1.8.0_144/lib/amd64;C:\ProgramData\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\QuickTime\QTSystem\;%M3%;C:\Program Files\Git\cmd;C:\Program Files (x86)\Google\Chrome\Application;C:\ProgramData\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\QuickTime\QTSystem\;C:\Program Files\Git\cmd;C:\formationJava\Maven\apache-maven-3.5.3\bin;C:\ProgramData\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\QuickTime\QTSystem\;C:\Program Files\Git\cmd;C:\formationJava\Maven\apache-maven-3.5.3\bin;C:\Program Files\Java\jdk-9.0.4\bin;C:\formationJava\Maven\apache-maven-3.5.3\bin;C:\Program Files\Java\jdk-9.0.4\bin;C:\formationJava\Maven\apache-maven-3.5.3\bin;C:\Users\Stagiaire\AppData\Local\GitHubDesktop\bin;C:\Program Files\Heroku\bin;C:\formationJava\eclipse;;."/>
     <property name="jdk.debug" value="release"/>
@@ -60,8 +60,8 @@
     <property name="sun.desktop" value="windows"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-  <testcase classname="fr.gtm.proxibanque.service.test.TestCompteService" name="testVirementSoldeDebiteurInsufPasDebit" time="6.553"/>
-  <testcase classname="fr.gtm.proxibanque.service.test.TestCompteService" name="testVirementSoldeDebiteurInsufPasCredit" time="0.141"/>
-  <testcase classname="fr.gtm.proxibanque.service.test.TestCompteService" name="testVirementSoldeCreditAug" time="0.297"/>
-  <testcase classname="fr.gtm.proxibanque.service.test.TestCompteService" name="testVirementSoldeDebiteurDim" time="0.234"/>
+  <testcase classname="fr.gtm.proxibanque.service.test.TestCompteService" name="testVirementSoldeDebiteurInsufPasDebit" time="0.175"/>
+  <testcase classname="fr.gtm.proxibanque.service.test.TestCompteService" name="testVirementSoldeDebiteurInsufPasCredit" time="0.087"/>
+  <testcase classname="fr.gtm.proxibanque.service.test.TestCompteService" name="testVirementSoldeCreditAug" time="0.147"/>
+  <testcase classname="fr.gtm.proxibanque.service.test.TestCompteService" name="testVirementSoldeDebiteurDim" time="0.12"/>
 </testsuite>

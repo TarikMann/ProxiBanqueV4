@@ -17,19 +17,19 @@
 
 			<div class="container-fluid">
 				<div class="row">
-
+<p:messages id="messageError" style="color:red"  />
 					<div class="col-sm-3">
 
 						<!--  navigation prévue dans les cas de navigation faces-config.xml -->
-						<h:button class="btn btn-secondary btn-sm"
+						<p:button class="btn btn-secondary"
 							id="affichageclient-button-creer" value="créer un client"
 							onclick="window.location.href='/ProxiBanqueV4_2/faces/creation-client.xhtml'; return false;"
 							action="/creation-client.xhtml" />
 
 					</div>
 					<div class="col-sm-9">
-						<h2>Bonjour, votre compte utilisateur :
-							#{clientProxiBean.conseiller.prenomConseiller}</h2>
+					<h2>Bonjour ,#{clientProxiBean.conseiller.nomConseiller},</h2>  <br></br><h2>la liste des clients: </h2>
+								
 					</div>
 				</div>
 
@@ -64,31 +64,34 @@
 								<!-- 								id="affichageclient-button-gestion" value="liste des comptes" -->
 								<!-- 								onclick="window.location.href='/ProxiBanqueV4_2/faces/liste-comptes-client.xhtml'; return false;" -->
 								<!-- 								action="/liste-comptes-client.xhtml" /> -->
-
-								<p:commandButton id="affichageclient-button-gestion-compte"
-									value="  liste des comptes"
-									action="#{compteBean.obtenirlisteDesCompte(client)}" />
-
-
-
+								<div class="row">
+									<div class="col-12">
+										<p:commandButton id="affichageclient-button-gestion-compte"
+											value="  liste des comptes"
+											action="#{compteBean.obtenirlisteDesCompte(client)}" />
 
 
+									</div>
+									<div class="col-12">
 
-								<h:commandButton class="btn btn-secondary btn-sm"
-									id="affichageclient-button-gestion" value="virement"
-									action="#{compteBean.affichagevirement(client)}" />
 
-								<h:commandButton class="btn btn-secondary btn-sm"
-									id="affichageclient-button-gestion-mod" value="modifier"
-									action="#{clientProxiBean.affichermodifierClient(client)}"  />
+										<h:commandButton class="btn btn-secondary btn-sm"
+											id="affichageclient-button-gestion" value="virement"
+											action="#{compteBean.affichagevirement(client)}" />
 
-								<h:commandButton
-									class=" btn 
+										<h:commandButton class="btn btn-secondary btn-sm"
+											id="affichageclient-button-gestion-mod" value="modifier"
+											action="#{clientProxiBean.affichermodifierClient(client)}" />
+
+										<h:commandButton
+											class=" btn 
 								btn-secondary 
 								btn-sm"
-									id="affichageclient-button-gestion-sup" value="supprimer"
-									action="#{clientProxiBean.supprimerClient(client)}" />
+											id="affichageclient-button-gestion-sup" value="supprimer"
+											action="#{clientProxiBean.supprimerClient(client)}" />
 
+									</div>
+								</div>
 							</p:column>
 
 						</p:dataTable>

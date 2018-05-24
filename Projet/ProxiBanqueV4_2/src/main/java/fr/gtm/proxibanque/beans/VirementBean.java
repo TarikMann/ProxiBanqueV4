@@ -1,6 +1,8 @@
 package fr.gtm.proxibanque.beans;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.context.FacesContext;
 
 import fr.gtm.proxibanque.domaine.Compte;
 import fr.gtm.proxibanque.service.CompteService;
@@ -75,8 +77,19 @@ public class VirementBean {
 
 		boolean recap = this.compteService.virement(compte1, compte2, this.sommeVirement);
 		System.out.println(recap);
+		FacesContext context = FacesContext.getCurrentInstance();
+		if (recap == true) {
+			context.addMessage("messagevalid", new FacesMessage("Virement Effectué"));
+			return "liste-clients.xhtml";
+		}else {
+
+			context.addMessage("messageError", new FacesMessage(FacesMessage.SEVERITY_ERROR,"Virement  non Effectué","Virement"));
+			//		System.out.println("ETatVirement : " + etatVirement);
+			return "virement.xhtml";
+		}
+
 		//		System.out.println("ETatVirement : " + etatVirement);
-		return "liste-clients";
+
 	}
 
 

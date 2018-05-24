@@ -1,0 +1,5 @@
+fr.gtm.proxibanque.beans
+fr.gtm.proxibanque.domaine
+fr.gtm.proxibanque.interfaces
+fr.gtm.proxibanque.service
+fr.gtm.proxibanque.service.test

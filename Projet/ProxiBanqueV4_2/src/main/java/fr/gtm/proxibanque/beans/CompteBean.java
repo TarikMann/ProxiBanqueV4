@@ -119,6 +119,7 @@ public class CompteBean {
 
 	@PostConstruct
 	public void init() {
+
 		System.out.println("La liste des comptes : " +this.listeComptes);
 		this.listeTousComptes = this.compteService.obtenirComptesBanque();
 		System.out.println("Lister tous les comptes : " + this.listeTousComptes);
@@ -162,6 +163,7 @@ public class CompteBean {
 
 		// remplir liste comptes
 		this.listeComptes = this.compteService.obtenirListeComptesClient(monClient);
+		this.listeTousComptes = this.compteService.obtenirComptesBanque();
 		System.out.println("La liste des comptes" + this.listeComptes);
 
 		return "virement";
