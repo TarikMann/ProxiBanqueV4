@@ -15,9 +15,10 @@
 	<ui:composition template="/template/common-layout.xhtml">
 
 		<ui:define name="section">
-
+			<p:messages ></p:messages>
 			<div class="container-fluid">
 				<div class="row">
+					
 					<!-- column 1 -->
 					<div class="col-sm"></div>
 					<h:form id="virement-form">
@@ -26,17 +27,19 @@
 
 							<h2>Virement compte à compte</h2>
 
-							<h3>Client : Valérie FABRE</h3>
+<!-- 							<h3>Client : #{clientProxiBean.clientProxi.nomClient}</h3> -->
 
 
-		<div class="form-group">
+							<div class="form-group">
 								<label for="selection2">Choisissez le compte à créditer
 									: </label>
-								<h:selectOneMenu id="idCompteCrediteur" value="#{virementBean.idCompteCrediteur}"
-									name="idCompteCrediteur" style="width:325px">	
+								<h:selectOneMenu id="idCompteCrediteur"
+									value="#{virementBean.idCompteCrediteur}"
+									name="idCompteCrediteur" style="width:325px">
 
 									<f:selectItems value="#{compteBean.listeComptes}" var="compte"
-										itemLabel="#{compte.numCompte}  Solde : #{compte.soldeCompte} Euros " itemValue="#{compte.idCompte}" />
+										itemLabel="#{compte.numCompte}  Solde : #{compte.soldeCompte} Euros "
+										itemValue="#{compte.idCompte}" />
 
 								</h:selectOneMenu>
 
@@ -45,35 +48,38 @@
 
 								<h:outputText for="selection1"
 									value="Choisissez le compte à débiter :" />
-								<h:selectOneMenu id="idCompteDebiteur" value="#{virementBean.idCompteDebiteur}"
+								<h:selectOneMenu id="idCompteDebiteur"
+									value="#{virementBean.idCompteDebiteur}"
 									name="idCompteDebiteur" style="width:325px">
 
 									<f:selectItems value="#{compteBean.listeTousComptes}"
-										var="compteAll" itemLabel="#{compteAll.numCompte} Solde : #{compteAll.soldeCompte} Euros "
+										var="compteAll"
+										itemLabel="#{compteAll.numCompte} Solde : #{compteAll.soldeCompte} Euros "
 										itemValue="#{compteAll.idCompte}" />
 
 								</h:selectOneMenu>
 
 							</div>
-					
+
 							<div class="form-group">
 								<h:outputText for="usr"
 									value="Choisissez le montant à transférer (EUR) :" />
-								<h:inputText type="text" class="form-control" id="sommeVirement" value="#{virementBean.sommeVirement}"
-									required="true" />
+								<h:inputText type="text" class="form-control" id="sommeVirement"
+									value="#{virementBean.sommeVirement}" required="true" />
 							</div>
 
 
 							<h:commandButton class="btn btn-primary"
-								value="effectuer le virement" action="#{virementBean.virement(virementBean)}" />
+								value="effectuer le virement"
+								action="#{virementBean.virement(virementBean)}" />
 						</div>
 					</h:form>
 
-			
 
-				<!-- column 3 -->
-				<div class="col-sm"></div>
-	</div>
+
+					<!-- column 3 -->
+					<div class="col-sm"></div>
+				</div>
 			</div>
 		</ui:define>
 
