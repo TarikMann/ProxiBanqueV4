@@ -55,7 +55,7 @@ public class CompteService {
 	 * concernant le client (concatenee dans les methodes avec des suffixes adaptes
 	 * aux operations realisees)
 	 */
-	private String debutUrl = "http://192.168.1.19:8080/webservice_1.0/api/compteWS";
+	private String debutUrl = "http://192.168.1.70:8080/webservice_1.0/api/compteWS";
 
 	/**
 	 * methode qui s'adresse au WebService pour recuperer une liste de tous les

@@ -34,7 +34,7 @@ public class ConseillerService {
 	 * concernant le conseiller (concatenee dans les methodes avec des suffixes
 	 * adaptes aux operations realisees)
 	 */
-	private String debutUrl = "http://192.168.1.19:8080/webservice_1.0/api/conseillerWS";
+	private String debutUrl = "http://192.168.1.70:8080/webservice_1.0/api/conseillerWS";
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(ConseillerService.class);
 
